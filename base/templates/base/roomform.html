@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="logformcont">
+<div class="formdiv">
+    <form action="" method="POST" >
+        {% csrf_token %}
+       <!--{{forminfo.as_p}}--> 
+       <div class="form_group">
+           <label for="room_topic">Topic</label>
+           <input type="text" name="topic" value="{{room.topic.name}}" list="topic-list" required>
+           <datalist id="topic-list">
+               <select name="" id="room_topic">
+                   {% for topic in topics %}
+                   <option value="{{topic.name}}">{{topic.name}}</option>
+                   {% endfor %}
+               </select>
+           </datalist>
+       </div>
+       <div class="form_group">
+           <label for="room_name">Name</label>
+           <input value="{{room.topic.name}}" type="text" required name="name">
+       </div>
+       <div class="form_group">
+        <label for="description">Description</label>
+        <input type="text" name="description"  value="{{room.topic.description}}" />
+    </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</div>
+{% endblock content %}

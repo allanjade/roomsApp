@@ -1,0 +1,74 @@
+  {% extends 'main.html' %}
+<html>
+
+<style>
+    .roomcont{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
+  
+
+    {% block content %}
+<div class="roomscontainer" >
+    <div> 
+         <!-- <a href="{{request.META.HTTP_REFERER}}"><button>Back</button></a> -->
+         
+            <!--show this buttons if the user is the owner of the account-->
+            {% if request.user == room.host %}
+            <a href="{% url 'roomupdate' room.id %}">Edit room</a>
+            <a href="{% url 'roomdelete' room.id %}">Delete room</a> <br>
+
+            {% endif %}
+
+
+            <h5>{{room.name}}</h5> 
+            <p>{{room.description}}</p>
+            <small>Created by <a href="{% url 'profile' room.host.id %}"> @{{room.host.username}}</a></small>
+            <p>{{room.topic}} course</p>
+            <div class="commentsection">
+                <h4>{{noofcomm}} Comments:</h4> <hr>
+        <!--comments form-->
+        {% if request.user.is_authenticated %}
+                <div class="commentform">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <textarea type="text" name="body" placeholder="Add comment here..." required></textarea>
+                        <input type="submit" value="Submit">
+                    </form>
+
+                </div>
+            {% endif %}
+                <!--comments form end-->
+                {% for comment in comments %}
+
+                <div> 
+                    {% if request.user == comment.user %}
+                    <a href="{% url 'messagedel' comment.id %}">Delete</a>     
+                    {% endif %}                     
+                    <!--(timesince) shows how long the comment has stayed since the posting date-->
+                    <img src="{{comment.user.avatar.url}}" alt="">
+                    <small><a href="{% url 'profile' comment.user.id %}">@{{comment.user.username}}</a>  {{comment.created |timesince}} ago.</small> 
+                    <P>{{comment.body}}</P>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+    
+    <div>
+        
+        <h4>({{participants.count}}) Participants</h4>
+        <hr>
+        {% for attendant in participants %}
+        <a href="{% url 'profile' attendant.id %}">
+        <div>
+            <img src="{{attendant.avatar.url}}" alt="">
+            <p>@{{attendant.username}}</p>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>    
+    {% endblock content %}
+
+    </html>

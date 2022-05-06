@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if page == 'login' %}
+<div class="logformcont">
+<div class="formdiv">
+    <form action="" method="post">
+        {% csrf_token %}
+        <form-head><h5>Login Here</h5></form-head><hr>
+        <input type="text" name="email"  placeholder="Email *"  required />
+
+        <input type="password" name="password"  placeholder="Password *" required />
+        <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'reset_password' %}">Forgot password?</a>
+    <p>Have not account?  <a href="{% url 'register' %}">Create account</a></p>
+    
+</div>
+</div>
+{% else %}
+<div class="logformcont">
+    <div class="formdiv">
+    <form action="" method="post">
+        {% csrf_token %}<form-head><h5>Register Here</h5></form-head><hr>
+        <!-- {{regform.as_p}} -->
+       <!-- <p class="label"> {{regform.name.label}}</p> -->
+        {{regform.name}}
+
+        <!-- {{regform.username.label}} -->
+        {{regform.username}}
+
+        <!-- {{regform.email.label}} -->
+        {{regform.email}}
+
+        <!-- {{regform.password1.label}} -->
+        {{regform.password1}}
+
+        <!-- {{regform.password2.label}} -->
+        {{regform.password2}}
+
+        <button type="submit">Submit</button>
+       {{regform.errors}} 
+    </form>
+    <p>Have an account?    <a href="{% url 'login' %}">Login</a></p>
+
+   </div>
+</div>
+
+<script>
+    /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+//We start indexing at one because CSRF_token is considered and input field 
+*/
+
+//Query All input fields
+var form_fields = document.getElementsByTagName('input')
+form_fields[2].placeholder='Full Name';
+form_fields[3].placeholder='Username e.g. @name342';
+form_fields[4].placeholder='Email';
+form_fields[5].placeholder='Password...';
+form_fields[6].placeholder='Retype password...';
+
+
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+}
+</script>
+{% endif %}
+{% endblock content %}

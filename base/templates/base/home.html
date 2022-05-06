@@ -1,0 +1,37 @@
+
+    {% extends 'main.html' %}
+<html>
+
+    {% block content %}
+
+<body>
+
+<div class="home-container">
+    <div>
+        <div>
+            {% include 'base/topicscomponent.html' %}
+            
+        </div>
+        <div class="morecontainer">
+            
+             <a href="{% url 'motopics' %}">More</a><hr>
+        </div>
+    </div>
+    <div >
+    <a href="{% url 'roomcreate' %}">Create Room</a>
+        <div class="topicscont">
+           {% include 'base/roomscomponent.html' %}
+
+           
+        </div>
+    </div>  
+<!--Activity Feeds-->
+    <div>
+        <div>
+            {% include 'base/activitycomponent.html' %}
+        </div>
+    </div>
+</div>
+    {% endblock content %}
+</body>
+</html>

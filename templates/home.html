@@ -1,0 +1,14 @@
+
+    {% extends 'main.html' %}
+
+    {% block content %}
+    <h1>This is a home page of this website</h1>
+<div>
+       {% for room in roomlist %}
+       
+           <h4>{{room.id}} of {{room.name}}</h4>
+       
+       {% endfor %}
+</div>
+
+    {% endblock content %}

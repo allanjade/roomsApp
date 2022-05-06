@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>fetch dat from api</title>
+    </head>
+
+    <body>
+        
+        <h2>Rooms list</h2>
+        <div id="roomcontainer">
+
+        </div>
+
+        <script>
+            let roomcont = document.getElementById('roomcontainer')
+            let getRooms = async() => {
+             let response = await fetch('http://127.0.0.1:8000/api/roomlist/')
+             let rooms = await response.json()
+             
+             for(let x = 0; rooms.length > x; x++){
+                 let room = rooms[x]
+                 let row = `<div>
+
+                    <h4>${room.name}</h4>
+                        <div>`
+                            roomcont.innerHTML += row
+             }
+            }
+            getRooms()
+        </script>
+    </body>
+</html>

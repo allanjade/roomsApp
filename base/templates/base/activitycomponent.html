@@ -1,0 +1,13 @@
+<h4>Recent activities</h4>
+<hr>
+{% for comment in comments %}
+<div class="activitycont" >
+    <img src="{{comment.user.avatar.url}}" style="width: 50px;height:50px;border-radius:50%;" alt="">
+    <small><a href="{% url 'profile' comment.user.id %}">@{{comment.user.name}} </a> {{comment.created|timesince}}</small><br>
+    <small>Replied to <a href="{% url 'rooms' comment.room.id %}">{{comment.room}}</small></a>
+    <p>{{comment}}</p>
+    {% if request.user == comment.user %}
+    <a href="{% url 'messagedel' comment.id %}">Delete</a>     
+    {% endif %}
+</div>
+{% endfor %}

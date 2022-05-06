@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <a href="{{request.META.HTTP_REFERER}}"><button>Back</button> </a>
+    {% for topic in topics %}
+    <li><a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a> <span>{{topic.room_set.all.count}}</span></li>
+    {% endfor %}
+</div>
+
+{% endblock content %}

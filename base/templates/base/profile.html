@@ -1,0 +1,45 @@
+
+
+    {% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .profilecont{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<div class="headcontainer">
+<div class="userdetails">
+    <div class="userdcont">
+
+
+<img src="{{userlist.avatar.url}}" alt="">
+<h3>@{{userlist.username}}</h3>
+<h4>{{userlist.email}}</h4>
+<p>{{userlist.bio}}</p>
+
+{% if request.user == userlist %}
+<a href="{% url 'updateuser' %}"><button> Update profile</button></a>
+{% endif %}
+</div>
+</div>
+
+<div class="profilecont datacont">
+<!--Topics-->
+    <div>
+         {% include 'base/topicscomponent.html' %}
+    </div>
+    <!--rooms-->
+    <div>
+        <h3>@{{user.name}}'s  Rooms</h3>
+        {% include 'base/roomscomponent.html' %}
+    </div>
+    <!--Feeds-->
+    <div>
+        {% include 'base/activitycomponent.html' %}
+    </div>
+</div>
+</div>
+{% endblock content %}

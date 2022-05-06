@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+<div class="logformcont">
+<div class="formdiv">
+<form action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<form-head><h5>Update these</h5></form-head><hr>
+{% for field in formm %}
+<div class='form-group'>
+<label for="pimg" class=""> {{field.label}}</label>
+{{field}}
+<!--<input id="pimg" type="file" name="pimg">-->
+</div>
+{% endfor %}
+
+<button type="submit">Update</button>
+</form>
+</div>
+</div>
+{% endblock content %}

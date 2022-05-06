@@ -1,0 +1,13 @@
+<h5>Search topics</h5><h6>{{count_room}} room(s) found</h6><hr>
+
+<div>
+   <a href="{% url 'home' %}">All <span>({{topics.count}})</span></a>
+</div>
+
+{% for topic in topics %}
+
+<div class="topicontainer">
+              <!--Filter by specific topic-->
+    <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}} <span>{{topic.room_set.all.count}}</span></a>
+</div>
+{% endfor %}

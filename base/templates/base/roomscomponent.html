@@ -1,0 +1,10 @@
+
+
+{% for room in roomlist %}
+<div class="rmcontainer">
+        <img src="{{room.host.avatar.url}}" style="width: 50px;height:50px;border-radius:50%;" alt="">
+        <a href="{% url 'profile' room.host.id %}">@{{room.host.username}}</a> <!-- dynamic url-->
+       <h4><a href="{% url 'rooms' room.id %}"> {{room.name}}</a></h4><br>
+        <span>{{room.topic.name}}</span><br> <span>{{room.created|timesince}} ago </span> | <small>{{room.participants.all.count}} joined</small>
+</div>
+{% endfor %}
